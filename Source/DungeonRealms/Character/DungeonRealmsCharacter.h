@@ -12,14 +12,9 @@ class DUNGEONREALMS_API ADungeonRealmsCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	ADungeonRealmsCharacter();
+	ADungeonRealmsCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
-	FOnPlayerInputComponentSetup OnPlayerInputComponentSetup;
-
-protected:
-	virtual void BeginPlay() override;
-
-public:	
-	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	
+	FOnPlayerInputComponentSetup OnPlayerInputComponentSetup;
 };
