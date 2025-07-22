@@ -15,6 +15,12 @@ UDungeonRealmsCharacterMovementComponent::UDungeonRealmsCharacterMovementCompone
 
 const FDungeonRealmsCharacterGroundInfo& UDungeonRealmsCharacterMovementComponent::GetGroundInfo() const
 {
+	if (!IsValid(CharacterOwner))
+	{
+		CachedGroundInfo.GroundDistance = DungeonRealmsCharacter::GroundTraceDistance;
+		return CachedGroundInfo;
+	}
+	
 	if (MovementMode == MOVE_Walking)
 	{
 		CachedGroundInfo.GroundHit = CurrentFloor.HitResult;
