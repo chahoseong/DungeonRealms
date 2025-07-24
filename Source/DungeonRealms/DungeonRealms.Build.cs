@@ -12,13 +12,15 @@ public class DungeonRealms : ModuleRules
 			"Core",
 			"CoreUObject",
 			"Engine",
-			"InputCore",
-			"EnhancedInput",
-			"GameplayTags"
+			"GameplayTags",
+			"GameplayAbilities",
+			"GameplayTasks",
 		]);
 
 		PrivateDependencyModuleNames.AddRange([
-			
+			"InputCore",
+			"EnhancedInput",
+			"NetCore"
 		]);
 		
 		PublicIncludePaths.AddRange([

@@ -1,12 +1,39 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "GameFramework/PlayerController.h"
 #include "DungeonRealmsPlayerController.generated.h"
+
+struct FInputActionValue;
+class UDungeonRealmsInputConfig;
+class UInputMappingContext;
 
 UCLASS()
 class DUNGEONREALMS_API ADungeonRealmsPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+public:
+	ADungeonRealmsPlayerController(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+
+	virtual void PostProcessInput(const float DeltaTime, const bool bGamePaused) override;
 	
+protected:
+	virtual void SetupInputComponent() override;
+	virtual void BeginPlay() override;
+
+private:
+	void Input_Move(const FInputActionValue& InputActionValue);
+	void Input_Look(const FInputActionValue& InputActionValue);
+	void Input_AbilityInputPressed(FGameplayTag InputTag);
+	void Input_AbilityInputHeld(FGameplayTag InputTag);
+	void Input_AbilityInputReleased(FGameplayTag InputTag);
+	
+protected:
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UInputMappingContext> DefaultInputMapping;
+
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UDungeonRealmsInputConfig> InputConfig;
 };

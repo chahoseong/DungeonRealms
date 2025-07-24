@@ -15,9 +15,8 @@ UDungeonRealmsCharacterMovementComponent::UDungeonRealmsCharacterMovementCompone
 
 const FDungeonRealmsCharacterGroundInfo& UDungeonRealmsCharacterMovementComponent::GetGroundInfo() const
 {
-	if (!IsValid(CharacterOwner))
+	if (!IsValid(CharacterOwner) || GFrameCounter == CachedGroundInfo.LastUpdateFrame)
 	{
-		CachedGroundInfo.GroundDistance = DungeonRealmsCharacter::GroundTraceDistance;
 		return CachedGroundInfo;
 	}
 	

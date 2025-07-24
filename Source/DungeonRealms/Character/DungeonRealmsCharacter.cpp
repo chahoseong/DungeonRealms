@@ -35,9 +35,12 @@ ADungeonRealmsCharacter::ADungeonRealmsCharacter(const FObjectInitializer& Objec
 	DungeonRealmsCharacterMovement->SetCrouchedHalfHeight(65.0f);
 }
 
-void ADungeonRealmsCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+UAbilitySystemComponent* ADungeonRealmsCharacter::GetAbilitySystemComponent() const
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	OnPlayerInputComponentSetup.Broadcast(PlayerInputComponent);
+	return AbilitySystemComponent;
 }
 
+UAttributeSet* ADungeonRealmsCharacter::GetAttributeSet() const
+{
+	return AttributeSet;
+}
