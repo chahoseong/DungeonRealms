@@ -1,8 +1,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystemInterface.h"
 #include "GameFramework/Character.h"
+#include "AbilitySystemInterface.h"
+#include "CombatSystem/DungeonRealmsCombatSystemInterface.h"
 #include "DungeonRealmsCharacter.generated.h"
 
 class UAttributeSet;
@@ -10,7 +11,7 @@ class UAttributeSet;
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnPossessed, AController*)
 
 UCLASS()
-class DUNGEONREALMS_API ADungeonRealmsCharacter : public ACharacter, public IAbilitySystemInterface
+class DUNGEONREALMS_API ADungeonRealmsCharacter : public ACharacter, public IAbilitySystemInterface, public IDungeonRealmsCombatSystemInterface
 {
 	GENERATED_BODY()
 
@@ -33,10 +34,15 @@ public:
 		return Cast<T>(GetAttributeSet());
 	}
 
+	virtual UDungeonRealmsCombatSystemComponent* GetCombatSystemComponent() const override;
+
 protected:
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+	UPROPERTY()
+	TObjectPtr<UDungeonRealmsCombatSystemComponent> CombatSystemComponent;
 };

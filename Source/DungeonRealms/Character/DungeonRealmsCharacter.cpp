@@ -1,6 +1,7 @@
 #include "Character/DungeonRealmsCharacter.h"
 #include "DungeonRealmsCharacterMovementComponent.h"
 #include "AI/Navigation/NavigationTypes.h"
+#include "CombatSystem/DungeonRealmsCombatSystemComponent.h"
 #include "Components/CapsuleComponent.h"
 
 ADungeonRealmsCharacter::ADungeonRealmsCharacter(const FObjectInitializer& ObjectInitializer)
@@ -33,6 +34,8 @@ ADungeonRealmsCharacter::ADungeonRealmsCharacter(const FObjectInitializer& Objec
 	DungeonRealmsCharacterMovement->GetNavAgentPropertiesRef().bCanCrouch = true;
 	DungeonRealmsCharacterMovement->bCanWalkOffLedgesWhenCrouching = true;
 	DungeonRealmsCharacterMovement->SetCrouchedHalfHeight(65.0f);
+
+	CombatSystemComponent = CreateDefaultSubobject<UDungeonRealmsCombatSystemComponent>(TEXT("CombatSystemComponent"));
 }
 
 UAbilitySystemComponent* ADungeonRealmsCharacter::GetAbilitySystemComponent() const
@@ -43,4 +46,9 @@ UAbilitySystemComponent* ADungeonRealmsCharacter::GetAbilitySystemComponent() co
 UAttributeSet* ADungeonRealmsCharacter::GetAttributeSet() const
 {
 	return AttributeSet;
+}
+
+UDungeonRealmsCombatSystemComponent* ADungeonRealmsCharacter::GetCombatSystemComponent() const
+{
+	return CombatSystemComponent;
 }

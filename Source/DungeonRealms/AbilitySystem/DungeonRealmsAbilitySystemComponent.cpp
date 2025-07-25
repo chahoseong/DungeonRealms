@@ -7,12 +7,16 @@ UDungeonRealmsAbilitySystemComponent* UDungeonRealmsAbilitySystemComponent::Find
 {
 	if (IsValid(Actor))
 	{
-		UAbilitySystemComponent* AbilitySystemComponent = Actor->FindComponentByClass<UAbilitySystemComponent>();
+		UAbilitySystemComponent* AbilitySystemComponent = nullptr;
+		
+		if (const IAbilitySystemInterface* AbilitySystemInterface = Cast<IAbilitySystemInterface>(Actor))
+		{
+			AbilitySystemComponent = AbilitySystemInterface->GetAbilitySystemComponent();
+		}
 
 		if (!IsValid(AbilitySystemComponent))
 		{
-			const IAbilitySystemInterface* AbilitySystemInterface = Cast<IAbilitySystemInterface>(Actor);
-			AbilitySystemComponent = AbilitySystemInterface ? AbilitySystemInterface->GetAbilitySystemComponent() : nullptr;
+			AbilitySystemComponent = Actor->FindComponentByClass<UAbilitySystemComponent>();
 		}
 		
 		return Cast<UDungeonRealmsAbilitySystemComponent>(AbilitySystemComponent);
